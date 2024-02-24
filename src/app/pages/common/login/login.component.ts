@@ -14,6 +14,8 @@ import { ToastService } from '../../../data/services/toast.service';
 import { PasswordModule } from 'primeng/password';
 import { NgClass } from '@angular/common';
 import { SpinnerComponent } from '../../../components/spinner/spinner.component';
+import { AuthService } from '../../../data/services/auth.service';
+import { TokenService } from '../../../data/services/token.service';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +43,11 @@ export class LoginComponent {
     password: new FormControl('', Validators.required),
   });
 
-  constructor(private readonly toast: ToastService) {}
+  constructor(
+    private readonly toast: ToastService,
+    private readonly auth: AuthService,
+    private readonly token: TokenService
+  ) {}
 
   onSubmit(): void {
     this.isLoading = true;
