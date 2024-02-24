@@ -1,0 +1,86 @@
+<div
+  class="relative w-full h-screen flex justify-center items-center bg-slate-100 px-5 md:px-0"
+>
+  <div
+    [ngClass]="isBgHover ? 'rotate-3' : 'rotate-6'"
+    class="absolute hidden lg:block bg-blue-500 w-[50rem] h-[27rem] rounded-md transition-all ease-in duration-100"
+  ></div>
+  <div
+    (mouseenter)="onHover()"
+    (mouseleave)="onHover()"
+    class="w-[98%] lg:w-[50rem] bg-white flex items-center justify-center lg:justify-between gap-4 rounded-md px-7 py-9 lg:py-10 lg:px-12 shadow-md z-10"
+  >
+    <div class="w-1/2 hidden lg:block">
+      <img
+        src="../../../../assets/ilustration/login-auth.svg"
+        alt="Login Ilustration"
+        class="w-96"
+      />
+    </div>
+    <div class="w-full lg:w-1/2">
+      <div
+        class="flex flex-col md:flex-row gap-4 justify-center items-center mb-5"
+      >
+        <img
+          src="../../../../assets/to-do.png"
+          alt="Logo"
+          class="w-16 lg:w-14"
+        />
+        <h1 class="text-center font-bold text-xl md:text-3xl">
+          Login Todo Apps
+        </h1>
+      </div>
+
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col gap-5"
+      >
+        <div class="flex flex-col gap-2">
+          <label class="font-semibold">Email</label>
+          <input
+            type="text"
+            pInputText
+            name="email"
+            formControlName="email"
+            placeholder="Masukkan Email Anda"
+          />
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <label class="font-semibold">Password</label>
+          <p-password
+            name="password"
+            formControlName="password"
+            [toggleMask]="true"
+            [style]="{ width: '100%' }"
+            [inputStyle]="{ width: '100%' }"
+            [feedback]="false"
+            placeholder="Masukkan Password Anda"
+          ></p-password>
+        </div>
+
+        <div class="flex flex-col gap-2">
+          <p-button
+            (onClick)="onSubmit()"
+            label="Login"
+            [style]="{ width: '100%' }"
+          ></p-button>
+        </div>
+      </form>
+
+      <p class="text-center mt-3 text-sm">
+        Belum Punya Akun?
+        <a routerLink="/register" class="cursor-pointer text-blue-600"
+          >Daftar Sekarang</a
+        >
+      </p>
+    </div>
+  </div>
+</div>
+<p-toast
+  [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' } }"
+></p-toast>
+@if (isLoading) {
+<app-spinner></app-spinner>
+}
