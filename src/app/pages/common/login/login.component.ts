@@ -67,7 +67,19 @@ export class LoginComponent {
         return;
       }
 
-      this.toast.success('Berhasil Login');
+      this.auth.loginUser(formData.value).subscribe({
+        next: (response) => {
+          const {
+            accessToken,
+            refreshToken,
+          }: { accessToken: string; refreshToken: string } = response.data;
+          this.token.setToken(accessToken, refreshToken, '/home');
+        },
+        error: (error) => {
+          this.toast.error(error.error.message);
+        },
+      });
+
       this.isLoading = false;
     }, 1500);
   }

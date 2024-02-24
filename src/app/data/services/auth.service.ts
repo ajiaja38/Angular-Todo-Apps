@@ -10,12 +10,19 @@ import { BASE_URL } from '../global/base-url';
 export class AuthService {
   constructor(private readonly http: HttpClient) {}
 
-  loginUser(
-    loginDto: LoginDto
-  ): Observable<{ accessToken: string; refreshToken: string }> {
-    return this.http.post<{ accessToken: string; refreshToken: string }>(
-      `${BASE_URL}/auth/login`,
-      loginDto
-    );
+  loginUser(loginDto: LoginDto): Observable<any> {
+    return this.http.post<any>(`${BASE_URL}/auth/login`, loginDto);
+  }
+
+  refreshToken(): Observable<any> {
+    return this.http.put<any>(`${BASE_URL}/auth/refreshToken`, {
+      refreshToken: localStorage.getItem('refreshToken'),
+    });
+  }
+
+  logout(): Observable<any> {
+    return this.http.delete<any>(`${BASE_URL}/auth/logout`, {
+      body: { refreshToken: localStorage.getItem('refreshToken') },
+    });
   }
 }
