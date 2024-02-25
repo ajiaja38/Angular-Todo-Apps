@@ -76,7 +76,7 @@ export class LoginComponent {
           this.token.setToken(accessToken, refreshToken, '/home');
         },
         error: (error) => {
-          this.toast.error(error.error.message);
+          this.toast.error(error);
         },
       });
 

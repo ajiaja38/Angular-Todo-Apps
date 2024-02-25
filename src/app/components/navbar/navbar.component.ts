@@ -32,7 +32,7 @@ export class NavbarComponent {
   }
 
   setPosition(): void {
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth < 768) {
       this.position = 'bottom-right';
     } else {
       this.position = 'top-right';
@@ -57,7 +57,7 @@ export class NavbarComponent {
               this.tokenService.logout();
             },
             error: (error) => {
-              this.toastService.error(error.error.message);
+              this.toastService.error(error);
             },
           });
           this.isLoading = false;

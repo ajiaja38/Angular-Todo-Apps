@@ -21,13 +21,12 @@ export const refreshTokenInterceptor: HttpInterceptorFn = (req, next) => {
             return next(req);
           }),
           catchError((err) => {
-            console.log(err.error.message);
-            return throwError(() => new Error('Unauthorized Exception'));
+            return throwError(() => err.error.message);
           })
         );
       }
 
-      return throwError(() => new Error('Unauthorized Exception'));
+      return throwError(() => error.error.message);
     })
   );
 };
