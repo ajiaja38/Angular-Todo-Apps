@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;800&display=swap");
+
 @layer tailwind-base, primeng;
 
 @import "tailwindcss/base" layer(tailwind-base);
@@ -7,3 +9,7 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
+
+* {
+  font-family: "Poppins", sans-serif;
+}
