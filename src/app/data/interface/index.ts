@@ -9,3 +9,12 @@ export interface RegisterDto {
   password: string;
   role: string;
 }
+
+export interface TodoDto {
+  author: string;
+  content: string;
+  id: string;
+  image: string;
+  status: boolean;
+  title: string;
+}

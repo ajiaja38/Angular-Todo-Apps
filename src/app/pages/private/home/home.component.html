@@ -1,10 +1,19 @@
+@if (isLoading) {
+<h1>Loading</h1>
+} @else { @if (todos.length) {
 <h1 class="mb-3 font-bold text-lg">
   Halo, Selamat Datang {{ name ? name : "User" }}
 </h1>
 <div class="pb-5 grid grid-cols-1 lg:grid-cols-4 gap-4">
-  <card-todo />
-  <card-todo />
-  <card-todo />
-  <card-todo />
-  <card-todo />
+  @for (todo of todos; track $index) {
+  <card-todo [todo]="todo" />
+  }
 </div>
+}@else {
+<div
+  class="w-full flex justify-center items-center"
+  style="height: calc(100vh - 64px)"
+>
+  tidak ada data
+</div>
+} }
