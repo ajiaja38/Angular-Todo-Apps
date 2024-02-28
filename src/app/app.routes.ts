@@ -4,6 +4,7 @@ import { RegisterComponent } from './pages/common/register/register.component';
 import { HomeComponent } from './pages/private/home/home.component';
 import { authGuard } from './utils/guard/auth.guard';
 import { LayoutComponent } from './components/layout/layout.component';
+import { ArchiveComponent } from './pages/private/archive/archive.component';
 
 export const routes: Routes = [
   {
@@ -25,6 +26,11 @@ export const routes: Routes = [
         path: 'home',
         title: 'Home',
         component: HomeComponent,
+      },
+      {
+        path: 'archive',
+        title: 'Arvhice',
+        component: ArchiveComponent,
       },
     ],
   },

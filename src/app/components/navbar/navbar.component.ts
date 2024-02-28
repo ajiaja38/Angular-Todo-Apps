@@ -7,11 +7,18 @@ import { ToastModule } from 'primeng/toast';
 import { TokenService } from '../../data/services/token.service';
 import { AuthService } from '../../data/services/auth.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'navbar-user',
   standalone: true,
-  imports: [ButtonModule, ConfirmDialogModule, ToastModule, SpinnerComponent],
+  imports: [
+    ButtonModule,
+    ConfirmDialogModule,
+    ToastModule,
+    SpinnerComponent,
+    RouterModule,
+  ],
   providers: [ConfirmationService],
   templateUrl: './navbar.component.html',
 })

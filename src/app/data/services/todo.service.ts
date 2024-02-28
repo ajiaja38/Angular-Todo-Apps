@@ -9,7 +9,11 @@ import { BASE_URL } from '../global/base-url';
 export class TodoService {
   constructor(private readonly http: HttpClient) {}
 
-  getAllTodo(): Observable<any> {
-    return this.http.get<any>(`${BASE_URL}/todo/all-by-author`);
+  getAllActiveTodo(): Observable<any> {
+    return this.http.get<any>(`${BASE_URL}/todo/all-by-author/active`);
+  }
+
+  getAllArchiveTodo(): Observable<any> {
+    return this.http.get<any>(`${BASE_URL}/todo/all-by-author/archive`);
   }
 }

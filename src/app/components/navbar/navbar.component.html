@@ -8,7 +8,25 @@
     <img src="../../../../assets/to-do.png" alt="Logo" class="w-7" />
     <h1 class="font-bold text-lg">Todo Apps</h1>
   </div>
-  <div>
+  <div class="flex justify-center items-center gap-3">
+    <ul class="flex justify-center items-center gap-3">
+      <li>
+        <a
+          routerLink="/home"
+          routerLinkActive="text-blue-600"
+          class="font-semibold"
+          >Home</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="/archive"
+          routerLinkActive="text-blue-600"
+          class="font-semibold"
+          >Arsip</a
+        >
+      </li>
+    </ul>
     <p-button
       (onClick)="logout($event)"
       icon="pi pi-power-off"

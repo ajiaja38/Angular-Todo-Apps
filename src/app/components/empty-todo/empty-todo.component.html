@@ -1,0 +1,14 @@
+<div class="flex flex-col gap-3 justify-center items-center">
+  <img
+    src="../../../assets/ilustration/Empty-cuate.svg"
+    alt="empty-todo"
+    class="w-64"
+  />
+  <h1 class="text-center font-bold text-2xl text-blue-600">
+    Belum Ada Todo Yang
+    {{
+      (currentPath === "home" && "Aktif") ||
+        (currentPath === "archive" && "di Arsipkan")
+    }}
+  </h1>
+</div>

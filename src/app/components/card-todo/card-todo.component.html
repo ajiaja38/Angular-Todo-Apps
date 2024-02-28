@@ -3,7 +3,7 @@
 >
   <img
     alt="Card"
-    [src]="todo.image"
+    [src]="'http://localhost:5000/v1/public/' + todo.image"
     (error)="handleImageError($event)"
     class="rounded-t-md h-40 object-center object-cover"
   />
@@ -19,6 +19,20 @@
         severity="primary"
         [style]="{ width: '30px', height: '30px' }"
         pTooltip="Detail todo"
+        tooltipPosition="bottom"
+      ></p-button>
+      <p-button
+        [icon]="todo.status ? 'pi pi-file' : 'pi pi-check-circle'"
+        [severity]="todo.status ? 'warning' : 'success'"
+        [style]="{ width: '30px', height: '30px' }"
+        [pTooltip]="todo.status ? 'Arsip todo' : 'Aktifkan todo'"
+        tooltipPosition="bottom"
+      ></p-button>
+      <p-button
+        icon="pi pi-delete-left"
+        severity="danger"
+        [style]="{ width: '30px', height: '30px' }"
+        pTooltip="Hapus todo"
         tooltipPosition="bottom"
       ></p-button>
     </div>
