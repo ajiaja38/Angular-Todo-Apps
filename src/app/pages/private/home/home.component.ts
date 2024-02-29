@@ -28,6 +28,17 @@ export class HomeComponent implements OnInit {
     private readonly todoService: TodoService
   ) {}
 
+  getAllActiveData(): void {
+    this.todoService.getAllActiveTodo().subscribe({
+      next: (response) => {
+        this.todos = [...this.todos, ...response.data];
+      },
+      error: (err) => {
+        console.log(err.error.message);
+      },
+    });
+  }
+
   ngOnInit(): void {
     this.isLoading = true;
 
@@ -41,14 +52,7 @@ export class HomeComponent implements OnInit {
         },
       });
 
-      this.todoService.getAllActiveTodo().subscribe({
-        next: (response) => {
-          this.todos = [...this.todos, ...response.data];
-        },
-        error: (err) => {
-          console.log(err.error.message);
-        },
-      });
+      this.getAllActiveData();
 
       this.isLoading = false;
     }, 1500);

@@ -27,6 +27,9 @@
         [style]="{ width: '30px', height: '30px' }"
         [pTooltip]="todo.status ? 'Arsip todo' : 'Aktifkan todo'"
         tooltipPosition="bottom"
+        (onClick)="
+          confirmActionTodo($event, todo.id, todo.status ? false : true)
+        "
       ></p-button>
       <p-button
         icon="pi pi-delete-left"
@@ -38,3 +41,9 @@
     </div>
   </div>
 </div>
+
+<p-confirmDialog [style]="{ width: '25rem' }"></p-confirmDialog>
+<p-toast></p-toast>
+@if (isLoading) {
+<app-spinner />
+}

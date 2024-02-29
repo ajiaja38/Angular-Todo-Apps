@@ -18,3 +18,7 @@ export interface TodoDto {
   status: boolean;
   title: string;
 }
+
+export interface StatusTodoDto {
+  status: boolean;
+}

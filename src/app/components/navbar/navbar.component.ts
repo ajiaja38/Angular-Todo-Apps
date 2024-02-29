@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
@@ -7,7 +7,7 @@ import { ToastModule } from 'primeng/toast';
 import { TokenService } from '../../data/services/token.service';
 import { AuthService } from '../../data/services/auth.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
-import { RouterLink, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'navbar-user',
@@ -52,9 +52,9 @@ export class NavbarComponent {
       message: 'Kamu Yakin ingin logout?',
       header: 'Peringatan',
       icon: 'pi pi-exclamation-triangle',
-      acceptIcon: 'none',
-      rejectIcon: 'none',
       rejectButtonStyleClass: 'p-button-text',
+      acceptLabel: 'Ya',
+      rejectLabel: 'Tidak',
       accept: () => {
         this.isLoading = true;
 
