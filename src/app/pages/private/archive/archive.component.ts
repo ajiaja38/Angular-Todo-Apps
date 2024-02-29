@@ -6,7 +6,7 @@ import { EmptyTodoComponent } from '../../../components/empty-todo/empty-todo.co
 import { UserService } from '../../../data/services/user.service';
 import { TodoService } from '../../../data/services/todo.service';
 import { TodoDto } from '../../../data/interface';
-import { ActivatedRoute } from '@angular/router';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-archive',
@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
     SkeletonModule,
     CardTodoSkeletonComponent,
     EmptyTodoComponent,
+    InputTextModule,
   ],
   templateUrl: './archive.component.html',
 })
@@ -24,6 +25,7 @@ export class ArchiveComponent implements OnInit {
   todos: TodoDto[] = [];
   isLoading: boolean = false;
   currentPath: string | undefined;
+  searchValue: string | undefined;
 
   constructor(
     private readonly userService: UserService,

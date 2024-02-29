@@ -6,6 +6,7 @@ import { TodoDto } from '../../../data/interface';
 import { SkeletonModule } from 'primeng/skeleton';
 import { CardTodoSkeletonComponent } from '../../../components/card-todo-skeleton/card-todo-skeleton.component';
 import { EmptyTodoComponent } from '../../../components/empty-todo/empty-todo.component';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import { EmptyTodoComponent } from '../../../components/empty-todo/empty-todo.co
     SkeletonModule,
     CardTodoSkeletonComponent,
     EmptyTodoComponent,
+    InputTextModule,
   ],
   templateUrl: './home.component.html',
 })
@@ -22,6 +24,7 @@ export class HomeComponent implements OnInit {
   name: string | undefined;
   todos: TodoDto[] = [];
   isLoading: boolean = false;
+  searchValue: string | undefined;
 
   constructor(
     private readonly userService: UserService,

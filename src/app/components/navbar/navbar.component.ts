@@ -8,7 +8,6 @@ import { TokenService } from '../../data/services/token.service';
 import { AuthService } from '../../data/services/auth.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { RouterModule } from '@angular/router';
-import { DialogService } from '../../data/services/dialog.service';
 
 @Component({
   selector: 'navbar-user',
@@ -21,17 +20,17 @@ import { DialogService } from '../../data/services/dialog.service';
     RouterModule,
   ],
   templateUrl: './navbar.component.html',
+  providers: [ConfirmationService],
 })
 export class NavbarComponent {
   isLoading: boolean = false;
   position: string = 'top-right';
 
   constructor(
-    private readonly confirmationService: ConfirmationService,
     private readonly toastService: ToastService,
     private readonly tokenService: TokenService,
     private readonly authService: AuthService,
-    private readonly dialogService: DialogService
+    private readonly confirmationService: ConfirmationService
   ) {}
 
   @HostListener('window:resize', ['$event'])
@@ -64,11 +63,18 @@ export class NavbarComponent {
   }
 
   logoutConfirm(event: Event) {
-    this.dialogService.dialog(
-      event,
-      'Kamu Yakin Ingin Keluar?',
-      () => this.logout(),
-      'positionDialog'
-    );
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Kamu Yakin Ingin Keluar?',
+      header: 'Peringatan',
+      icon: 'pi pi-exclamation-triangle',
+      rejectButtonStyleClass: 'p-button-text',
+      acceptLabel: 'Ya',
+      rejectLabel: 'Tidak',
+      accept: () => {
+        this.logout();
+      },
+      key: 'positionDialog',
+    });
   }
 }

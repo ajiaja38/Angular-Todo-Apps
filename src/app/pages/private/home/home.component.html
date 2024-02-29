@@ -3,20 +3,33 @@
   <p-skeleton height="1.5rem"></p-skeleton>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 pb-6">
-  <app-card-todo-skeleton></app-card-todo-skeleton>
-  <app-card-todo-skeleton></app-card-todo-skeleton>
-  <app-card-todo-skeleton></app-card-todo-skeleton>
-  <app-card-todo-skeleton></app-card-todo-skeleton>
+  <app-card-todo-skeleton />
+  <app-card-todo-skeleton />
+  <app-card-todo-skeleton />
+  <app-card-todo-skeleton />
 </div>
 } @else { @if (todos.length) {
-<h1 class="mb-3 font-bold text-lg">
-  Halo, Selamat Datang {{ name ? name : "User" }}
-</h1>
+<div class="mb-4">
+  <h1 class="mb-3 font-bold text-lg">
+    Halo, Selamat Datang {{ name ? name : "User" }}
+  </h1>
+  <div class="p-input-icon-left w-full md:w-[19rem]">
+    <i class="pi pi-search"></i>
+    <input
+      type="text"
+      pInputText
+      [style]="{ width: '100%' }"
+      placeholder="Cari Todo"
+      (model)="(searchValue)"
+    />
+  </div>
+</div>
 <div class="pb-5 grid grid-cols-1 lg:grid-cols-4 gap-4">
   @for (todo of todos; track $index) {
   <card-todo [todo]="todo" />
   }
 </div>
+<div class="pb-4">Pagination</div>
 }@else {
 <div
   class="w-full flex justify-center items-center"

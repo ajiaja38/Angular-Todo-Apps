@@ -5,6 +5,7 @@ import { HomeComponent } from './pages/private/home/home.component';
 import { authGuard } from './utils/guard/auth.guard';
 import { LayoutComponent } from './components/layout/layout.component';
 import { ArchiveComponent } from './pages/private/archive/archive.component';
+import { AddTodoComponent } from './pages/private/add-todo/add-todo.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,11 @@ export const routes: Routes = [
         path: 'archive',
         title: 'Arvhice',
         component: ArchiveComponent,
+      },
+      {
+        path: 'add-todo',
+        title: 'Add Todo',
+        component: AddTodoComponent,
       },
     ],
   },

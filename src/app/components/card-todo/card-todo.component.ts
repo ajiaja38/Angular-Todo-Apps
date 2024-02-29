@@ -8,7 +8,8 @@ import { ToastService } from '../../data/services/toast.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogService } from '../../data/services/dialog.service';
+import { DatePipe } from '@angular/common';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'card-todo',
@@ -19,8 +20,10 @@ import { DialogService } from '../../data/services/dialog.service';
     SpinnerComponent,
     ToastModule,
     ConfirmDialogModule,
+    DatePipe,
   ],
   templateUrl: './card-todo.component.html',
+  providers: [ConfirmationService],
 })
 export class CardTodoComponent implements OnInit {
   @Input() todo!: TodoDto;
@@ -34,7 +37,7 @@ export class CardTodoComponent implements OnInit {
     private readonly routes: ActivatedRoute,
     private readonly toastService: ToastService,
     private readonly router: Router,
-    private readonly dialogService: DialogService
+    private readonly confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -49,9 +52,18 @@ export class CardTodoComponent implements OnInit {
     const message: string = `Yakin akan ${
       this.currentPage === 'home' ? 'Mengarsipkan' : 'Mengaktifkan'
     } Todo?`;
-    this.dialogService.dialog(event, message, () =>
-      this.updateStatusTodo(id, status)
-    );
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message,
+      header: 'Peringatan',
+      icon: 'pi pi-exclamation-triangle',
+      rejectButtonStyleClass: 'p-button-text',
+      acceptLabel: 'Ya',
+      rejectLabel: 'Tidak',
+      accept: () => {
+        this.updateStatusTodo(id, status);
+      },
+    });
   }
 
   updateStatusTodo(id: string, status: boolean): void {
