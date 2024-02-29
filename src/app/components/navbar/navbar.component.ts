@@ -8,6 +8,7 @@ import { TokenService } from '../../data/services/token.service';
 import { AuthService } from '../../data/services/auth.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import { RouterModule } from '@angular/router';
+import { DialogService } from '../../data/services/dialog.service';
 
 @Component({
   selector: 'navbar-user',
@@ -19,7 +20,6 @@ import { RouterModule } from '@angular/router';
     SpinnerComponent,
     RouterModule,
   ],
-  providers: [ConfirmationService],
   templateUrl: './navbar.component.html',
 })
 export class NavbarComponent {
@@ -30,7 +30,8 @@ export class NavbarComponent {
     private readonly confirmationService: ConfirmationService,
     private readonly toastService: ToastService,
     private readonly tokenService: TokenService,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private readonly dialogService: DialogService
   ) {}
 
   @HostListener('window:resize', ['$event'])
@@ -46,31 +47,28 @@ export class NavbarComponent {
     }
   }
 
-  logout(event: Event) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: 'Kamu Yakin ingin logout?',
-      header: 'Peringatan',
-      icon: 'pi pi-exclamation-triangle',
-      rejectButtonStyleClass: 'p-button-text',
-      acceptLabel: 'Ya',
-      rejectLabel: 'Tidak',
-      accept: () => {
-        this.isLoading = true;
+  logout(): void {
+    this.isLoading = true;
 
-        setTimeout(() => {
-          this.authService.logout().subscribe({
-            next: () => {
-              this.tokenService.logout();
-            },
-            error: (error) => {
-              this.toastService.error(error);
-            },
-          });
-          this.isLoading = false;
-        }, 1500);
-      },
-      key: 'positionDialog',
-    });
+    setTimeout(() => {
+      this.authService.logout().subscribe({
+        next: () => {
+          this.tokenService.logout();
+        },
+        error: (error) => {
+          this.toastService.error(error);
+        },
+      });
+      this.isLoading = false;
+    }, 1500);
+  }
+
+  logoutConfirm(event: Event) {
+    this.dialogService.dialog(
+      event,
+      'Kamu Yakin Ingin Keluar?',
+      () => this.logout(),
+      'positionDialog'
+    );
   }
 }

@@ -8,7 +8,7 @@ import {
   provideHttpClient,
   withInterceptors,
 } from '@angular/common/http';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { refreshTokenInterceptor } from './utils/interceptor/refresh-token.interceptor';
 
 export const appConfig: ApplicationConfig = {
@@ -17,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideAnimations(),
     MessageService,
+    ConfirmationService,
     provideHttpClient(withInterceptors([refreshTokenInterceptor])),
   ],
 };

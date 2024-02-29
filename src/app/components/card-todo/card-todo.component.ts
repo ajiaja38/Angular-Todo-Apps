@@ -6,9 +6,9 @@ import { TodoService } from '../../data/services/todo.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from '../../data/services/toast.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
-import { ConfirmationService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogService } from '../../data/services/dialog.service';
 
 @Component({
   selector: 'card-todo',
@@ -20,7 +20,6 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ToastModule,
     ConfirmDialogModule,
   ],
-  providers: [ConfirmationService],
   templateUrl: './card-todo.component.html',
 })
 export class CardTodoComponent implements OnInit {
@@ -35,7 +34,7 @@ export class CardTodoComponent implements OnInit {
     private readonly routes: ActivatedRoute,
     private readonly toastService: ToastService,
     private readonly router: Router,
-    private readonly confirmationService: ConfirmationService
+    private readonly dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -46,26 +45,13 @@ export class CardTodoComponent implements OnInit {
     event.target.src = this.defaultImage;
   }
 
-  dialog(event: Event, message: string, callBack: Function): void {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message,
-      header: 'Peringatan',
-      icon: 'pi pi-exclamation-triangle',
-      rejectButtonStyleClass: 'p-button-text',
-      acceptLabel: 'Ya',
-      rejectLabel: 'Tidak',
-      accept: () => {
-        callBack();
-      },
-    });
-  }
-
   confirmActionTodo(event: Event, id: string, status: boolean): void {
     const message: string = `Yakin akan ${
       this.currentPage === 'home' ? 'Mengarsipkan' : 'Mengaktifkan'
     } Todo?`;
-    this.dialog(event, message, () => this.updateStatusTodo(id, status));
+    this.dialogService.dialog(event, message, () =>
+      this.updateStatusTodo(id, status)
+    );
   }
 
   updateStatusTodo(id: string, status: boolean): void {
