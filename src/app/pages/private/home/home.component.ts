@@ -23,6 +23,7 @@ import { InputTextModule } from 'primeng/inputtext';
 export class HomeComponent implements OnInit {
   name: string | undefined;
   todos: TodoDto[] = [];
+  originalTodos: TodoDto[] = [];
   isLoading: boolean = false;
   searchValue: string | undefined;
 
@@ -31,10 +32,23 @@ export class HomeComponent implements OnInit {
     private readonly todoService: TodoService
   ) {}
 
+  onSearchChange(e: Event): void {
+    const newValue = (e.target as HTMLInputElement).value.toLowerCase();
+
+    if (!newValue) {
+      this.todos = [...this.originalTodos];
+    } else {
+      this.todos = this.originalTodos.filter((data) =>
+        data.title.toLowerCase().includes(newValue)
+      );
+    }
+  }
+
   getAllActiveData(): void {
     this.todoService.getAllActiveTodo().subscribe({
       next: (response) => {
-        this.todos = [...this.todos, ...response.data];
+        this.todos = [...response.data];
+        this.originalTodos = [...response.data];
       },
       error: (err) => {
         console.log(err.error.message);

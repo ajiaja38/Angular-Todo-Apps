@@ -20,7 +20,7 @@
       pInputText
       [style]="{ width: '100%' }"
       placeholder="Cari Todo"
-      (model)="(searchValue)"
+      (change)="onSearchChange($event)"
     />
   </div>
 </div>
